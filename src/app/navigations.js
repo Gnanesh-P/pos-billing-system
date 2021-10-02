@@ -13,7 +13,7 @@ export const navigations = [
     },
     {
         name: 'Point of Sale',
-        path: '/dashboard',
+        path: '/invoice',
         icon: 'description',
     } 
    

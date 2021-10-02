@@ -11,6 +11,7 @@ import dragAndDropRoute from './views/Drag&Drop/DragAndDropRoute'
 import formsRoutes from './views/forms/FormsRoutes'
 import mapRoutes from './views/map/MapRoutes'
 import billingRoutes from './views/billing/BillingRoutes'
+import InvoiceRoutes from './views/pos/InvoiceRoutes'
 
 
 const redirectRoute = [
@@ -30,6 +31,7 @@ const errorRoute = [
 const routes = [
     ...dashboardRoutes,
     ...billingRoutes,
+    ...InvoiceRoutes,
     ...materialRoutes,
     ...utilitiesRoutes,
     ...chartsRoute,

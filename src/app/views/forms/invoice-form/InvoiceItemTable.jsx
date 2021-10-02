@@ -33,7 +33,7 @@ const InvoiceItemTable = ({ values, handleChange, setFieldValue }) => {
             {(arrayHelpers) => (
                 <div className="overflow-auto">
                     <Table className="whitespace-pre min-w-750">
-                        <TableHead>
+                        <TableHead  className="gnanesh"style={{backgroundColor:"#bfb5b5eb"}}>
                             <TableRow>
                                 <TableCell colSpan={7}>Item Details</TableCell>
                                 <TableCell colSpan={2}>Quantity </TableCell>
