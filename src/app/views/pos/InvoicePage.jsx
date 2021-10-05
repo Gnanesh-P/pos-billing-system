@@ -6,8 +6,8 @@ import Document from './Document'
 import Page from './Page'
 import Download from './DownloadPDF'
 import { initialInvoice, initialProductLine } from './data/initialData';
-import LineItems from './LineItem'
-
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
 // import uuidv4 from 'uuid/v4'
 
 class Invoice extends Component {
@@ -97,6 +97,7 @@ class Invoice extends Component {
   calcGrandTotal = () => {
     return this.calcLineItemsTotal() + this.calcTaxTotal()
   }
+ 
   render = () => {
     return (
 <Document pdfMode={true}>
@@ -140,8 +141,7 @@ class Invoice extends Component {
           <form>
             <div className={styles.valueTable}>
               <div className={styles.row}>
-                <div className={styles.label}>Tax Rate (%)</div>
-                <div className={styles.value}><input name="taxRate" type="number" step="0.01" value={this.state.taxRate} onChange={this.handleInvoiceChange} onFocus={this.handleFocusSelect} /></div>
+              
               </div>
             </div>
           </form>

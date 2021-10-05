@@ -7,14 +7,19 @@ export const navigations = [
         icon: 'send',
     },
     {
+        name: 'Point of Sale',
+        path: '/customerinvoice',
+        icon: 'description',
+    } ,
+    {
         name: 'Inventory Management',
         path: '/dashboard',
         icon: 'store',
     },
     {
-        name: 'Point of Sale',
-        path: '/invoice',
-        icon: 'description',
+        name: 'Account',
+        path: '/account',
+        icon: 'store',
     } 
    
 ]

@@ -12,8 +12,10 @@ import {
     MenuItem, TablePagination,
     Select,
 } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
+import { AccountCircle } from '@material-ui/icons'
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
     productTable: {
@@ -39,29 +41,22 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
 // const [orderBy, setOrderBy] = useState()
 
 
-
-const TopSellingTable = () => {
+const CustomerTable = () => {
     const classes = useStyles()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
 
-    const emptyRows =
-        rowsPerPage - Math.min(rowsPerPage, productList.length - page * rowsPerPage);
+const history = useHistory()
+  
 
-    const handleChangeRowsPerPage = event => {
-        setRowsPerPage(parseInt(event.target.value, 5));
-        setPage(0);
+    const navigateToInvoice = event => {
+        history.push("/invoice")
     };
     return (
         <Card elevation={3} className="pt-5 mb-6">
             <div className="flex justify-between items-center px-6 mb-3">
-                <span className="card-title">Available Products</span>
-                <span class="material-icons" tooltip="Download excel">
-                    file_download
-                </span>
+                <span className="card-title">Customer Bills</span>
+
             </div>
             <div className="overflow-auto">
                 <Table
@@ -72,17 +67,21 @@ const TopSellingTable = () => {
                 >
                     <TableHead>
                         <TableRow>
+                        
                             <TableCell className="px-6" colSpan={3}>
-                                Name
+                                Customer Name
                             </TableCell>
                             <TableCell className="px-6" colSpan={3}>
-                                Product Category
+                                Mobile Number
+                            </TableCell>
+                            <TableCell className="px-6" colSpan={3}>
+                                Invoice Number
                             </TableCell>
                             <TableCell className="px-0" colSpan={2}>
-                                Price
+                                Total Cost
                             </TableCell>
                             <TableCell className="px-0" colSpan={2}>
-                                Stock Status
+                                Bill status
                             </TableCell>
                             <TableCell className="px-0" colSpan={1}>
                                 Action
@@ -94,13 +93,16 @@ const TopSellingTable = () => {
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((product, index) => (
                                 <TableRow key={index} hover>
+                                            
                                     <TableCell
                                         className="px-0 capitalize"
                                         colSpan={3}
                                         align="left"
                                     >
                                         <div className="flex items-center">
-                                            <Avatar src={product.imgUrl} />
+                                            <IconButton>
+                                                <AccountCircle></AccountCircle>
+                                            </IconButton>
                                             <p className="m-0 ml-8">
                                                 {product.name}
                                             </p>
@@ -113,7 +115,21 @@ const TopSellingTable = () => {
                                     >
                                         <div className="flex items-center">
                                             <p className="m-0 ml-8">
-                                                Groceries
+                                                98443234423
+                                            </p>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        colSpan={3}
+                                        align="left"
+                                    >
+                                        <div className="flex items-center">
+                                            <IconButton>
+                                                <AccountCircle></AccountCircle>
+                                            </IconButton>
+                                            <p className="m-0 ml-8">
+                                                11111
                                             </p>
                                         </div>
                                     </TableCell>
@@ -122,37 +138,21 @@ const TopSellingTable = () => {
                                         align="left"
                                         colSpan={2}
                                     >
-                                        $
-                                        {product.price > 999
-                                            ? (product.price / 1000).toFixed(1) +
-                                            'k'
-                                            : product.price}
+                                       ${product.price}
                                     </TableCell>
-
                                     <TableCell
-                                        className="px-0"
+                                        className="px-0 capitalize"
                                         align="left"
                                         colSpan={2}
                                     >
-                                        {product.available ? (
-                                            product.available < 20 ? (
-                                                <small className="border-radius-4 bg-secondary text-white px-2 py-2px">
-                                                    {product.available} available
-                                                </small>
-                                            ) : (
-                                                <small className="border-radius-4 bg-primary text-white px-2 py-2px">
-                                                    in stock
-                                                </small>
-                                            )
-                                        ) : (
-                                            <small className="border-radius-4 bg-error text-white px-2 py-2px">
-                                                out of stock
-                                            </small>
-                                        )}
+                                        Paid
                                     </TableCell>
+
                                     <TableCell className="px-0" colSpan={1}>
-                                        <IconButton>
-                                            <Icon color="primary">edit</Icon>
+                                        <IconButton onClick={navigateToInvoice}>
+                                            <Icon>arrow_right_alt</Icon>
+                                        </IconButton>
+                                        <IconButton onClick={navigateToInvoice}>
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>
@@ -160,15 +160,7 @@ const TopSellingTable = () => {
                     </TableBody>
 
                 </Table>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={productList.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
+
             </div>
         </Card>
     )
@@ -177,76 +169,34 @@ const TopSellingTable = () => {
 const productList = [
     {
         imgUrl: '/assets/images/products/headphone-2.jpg',
-        name: 'earphone',
+        name: 'Gnanesh',
         price: 100,
         available: 15,
     },
     {
         imgUrl: '/assets/images/products/headphone-3.jpg',
-        name: 'earphone',
-        price: 1500,
+        name: 'Sujith',
+        price: 100,
         available: 30,
     },
     {
         imgUrl: '/assets/images/products/iphone-2.jpg',
-        name: 'iPhone x',
+        name: 'Manoj',
         price: 1900,
         available: 35,
+    },
+    {
+        imgUrl: '/assets/images/products/headphone-2.jpg',
+        name: 'Daniel',
+        price: 100,
+        available: 15,
     },
     {
         imgUrl: '/assets/images/products/headphone-2.jpg',
         name: 'earphone',
         price: 100,
         available: 15,
-    },
-    {
-        imgUrl: '/assets/images/products/headphone-2.jpg',
-        name: 'earphone',
-        price: 100,
-        available: 15,
-    },
-    {
-        imgUrl: '/assets/images/products/headphone-3.jpg',
-        name: 'earphone',
-        price: 1500,
-        available: 30,
-    },
-    {
-        imgUrl: '/assets/images/products/iphone-2.jpg',
-        name: 'iPhone x',
-        price: 1900,
-        available: 35,
-    },
-    {
-        imgUrl: '/assets/images/products/headphone-2.jpg',
-        name: 'earphone',
-        price: 100,
-        available: 15,
-    },
-    {
-        imgUrl: '/assets/images/products/headphone-3.jpg',
-        name: 'earphone',
-        price: 1500,
-        available: 30,
-    },
-    {
-        imgUrl: '/assets/images/products/iphone-2.jpg',
-        name: 'iPhone x',
-        price: 1900,
-        available: 35,
-    },
-    {
-        imgUrl: '/assets/images/products/iphone-1.jpg',
-        name: 'iPhone x',
-        price: 100,
-        available: 0,
-    },
-    {
-        imgUrl: '/assets/images/products/headphone-3.jpg',
-        name: 'Head phone',
-        price: 1190,
-        available: 5,
-    },
+    }
 ]
 
-export default TopSellingTable
+export default CustomerTable

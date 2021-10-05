@@ -12,6 +12,7 @@ import formsRoutes from './views/forms/FormsRoutes'
 import mapRoutes from './views/map/MapRoutes'
 import billingRoutes from './views/billing/BillingRoutes'
 import InvoiceRoutes from './views/pos/InvoiceRoutes'
+import CustomerInvoiceRoutes from './views/pos/customer_invoice/CustomerInvoiceRoute'
 
 
 const redirectRoute = [
@@ -32,6 +33,7 @@ const routes = [
     ...dashboardRoutes,
     ...billingRoutes,
     ...InvoiceRoutes,
+    ...CustomerInvoiceRoutes,
     ...materialRoutes,
     ...utilitiesRoutes,
     ...chartsRoute,
